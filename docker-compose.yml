@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  authgoapp:
+    build: 
+      context: ./auth
+      dockerfile: Dockerfile
+    volumes:
+      - ./auth:/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    env_file:
+      - ./auth/.env
+    environment:
+      - JWT_SECRET_KEY=sua_chave_secreta
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
