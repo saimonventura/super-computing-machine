@@ -14,14 +14,16 @@ import (
 )
 
 type AuthService struct {
-	RedisClient *redis.Client
-	SecretKey   string
+	RedisClient      *redis.Client
+	SecretKey        string
+	messagingService domain.MessagingService
 }
 
-func NewAuthService(client *redis.Client, secretKey string) *AuthService {
+func NewAuthService(client *redis.Client, secretKey string, messaging domain.MessagingService) *AuthService {
 	return &AuthService{
-		RedisClient: client,
-		SecretKey:   secretKey,
+		RedisClient:      client,
+		SecretKey:        secretKey,
+		messagingService: messaging,
 	}
 }
 
@@ -55,6 +57,9 @@ func (s *AuthService) Authenticate(email, password string) (string, error) {
 	if err != nil {
 		return "", errors.New("could not generate token")
 	}
+
+	msg := []byte("Login successful for user: " + email)
+	s.messagingService.Publish("user.login.success", msg)
 
 	return tokenString, nil
 }

@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"super-computing-machine/auth/infraestrutura/config"
+	"super-computing-machine/auth/infrastructure/config"
 
 	"github.com/go-redis/redis/v8"
 )
