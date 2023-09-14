@@ -13,7 +13,7 @@ Contains lessons from [A Tour of Go](https://go.dev/tour). This is an interactiv
 This directory focuses on the initial steps in implementing authentication in Go. Key features include:
 
 - **Redis Database**: Utilizes Redis as the datastore for login credentials.
-- **Messaging with RabbitMQ**: Upon a successful login, a message is dispatched using RabbitMQ.
+- **Messaging with NATS**: Upon successful login, a message is dispatched using NATS.
 - **JWT Authentication**: Successful logins respond with a cookie containing a JWT (JSON Web Token).
 - **Architecture**: The design pattern followed in this section is the Hexagonal Architecture along with Domain-Driven Design (DDD).
 
